@@ -1,0 +1,20 @@
+[project]
+name = "mars-to-zarr"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Kasper Hintz", email = "kah@dmi.dk"},
+]
+dependencies = [
+    "ecmwf-api-client>=1.6.5",
+    "xarray>=2025.1.2",
+    "zarr<3",
+    "loguru>=0.7.3",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = false
