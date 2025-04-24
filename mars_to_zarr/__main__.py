@@ -1,10 +1,9 @@
 import sys
 import os
 from argparse import ArgumentParser
-#3rd party
+
 from loguru import logger
 
-#internal
 from mars_to_zarr.retrieve_from_mars import retrieve_data
 
 def run():
@@ -12,6 +11,11 @@ def run():
 
     parser = ArgumentParser(
         description="Train or evaluate NeurWP models for LAM"
+    )
+    parser.add_argument(
+        "--config",
+        help="Path to the yaml config file to load.",
+        default="example.globalDT.yaml"
     )
     parser.add_argument(
         "-v",
