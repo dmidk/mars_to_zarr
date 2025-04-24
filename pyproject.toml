@@ -7,9 +7,10 @@ authors = [
 ]
 dependencies = [
     "ecmwf-api-client>=1.6.5",
-    "xarray>=2025.1.2",
+    "xarray<=2024.11.0",
     "zarr<3",
     "loguru>=0.7.3",
+    "pyyaml>=6.0.2"
 ]
 requires-python = ">=3.11"
 readme = "README.md"
