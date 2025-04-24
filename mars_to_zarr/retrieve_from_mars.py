@@ -1,5 +1,5 @@
 import argparse
-
+import datetime as dt
 from loguru import logger
 from ecmwfapi import ECMWFService
 
@@ -9,7 +9,7 @@ def logging_wrapper(msg):
     logger.info(msg)
 
 
-def retrieve_data(args: argparse.Namespace):
+def retrieve_data(args: argparse.Namespace, analysis: dt.datetime):
 
     server = ECMWFService("mars", log=logging_wrapper)
 
@@ -19,14 +19,14 @@ def retrieve_data(args: argparse.Namespace):
     {
         "class": "od",
         "stream": "oper",
-        "date" : "2025-03-08",
-        "time": "12:00:00",
+        "date": analysis.strftime("%Y-%m-%d"),
+        "time": analysis.strftime("%H:00:00"),
         "expver": "1",
         "Area": area,
         "Grid": "0.25/0.25",
         "type": "fc",
         "levtype": "sfc",
         "param": "151/165/166/167/172",
-        "step": "0/6/12/18/24",
+        "step": "0/6/12/18/24/30",
     },
     "ifs.grib")
