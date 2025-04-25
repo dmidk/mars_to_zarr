@@ -2,10 +2,10 @@
 # It is not intended for manual editing.
 
 [metadata]
-groups = ["default"]
+groups = ["default", "gribscan"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:acefb3bfbf528cfd04e4068dc86ae67813dd6366583a315c91101eb39e030751"
+content_hash = "sha256:26b0e1f30b50446e64068f4589036cbb13999ab1029ad3965a3060aa0e6864ec"
 
 [[metadata.targets]]
 requires_python = ">=3.11"
@@ -24,7 +24,7 @@ name = "attrs"
 version = "25.3.0"
 requires_python = ">=3.8"
 summary = "Classes Without Boilerplate"
-groups = ["default"]
+groups = ["gribscan"]
 files = [
     {file = "attrs-25.3.0-py3-none-any.whl", hash = "sha256:427318ce031701fea540783410126f03899a97ffc6f61596ad581ac2e40e3bc3"},
     {file = "attrs-25.3.0.tar.gz", hash = "sha256:75d7cefc7fb576747b2c81b4442d4d4a1ce0900973527c011d1030fd3bf4af1b"},
@@ -35,7 +35,7 @@ name = "cffi"
 version = "1.17.1"
 requires_python = ">=3.8"
 summary = "Foreign Function Interface for Python calling C code."
-groups = ["default"]
+groups = ["gribscan"]
 dependencies = [
     "pycparser",
 ]
@@ -82,7 +82,7 @@ name = "cfgrib"
 version = "0.9.15.0"
 requires_python = ">=3.7"
 summary = "Python interface to map GRIB files to the NetCDF Common Data Model following the CF Convention using ecCodes."
-groups = ["default"]
+groups = ["gribscan"]
 dependencies = [
     "attrs>=19.2",
     "click",
@@ -99,7 +99,7 @@ name = "click"
 version = "8.1.8"
 requires_python = ">=3.7"
 summary = "Composable command line interface toolkit"
-groups = ["default"]
+groups = ["default", "gribscan"]
 dependencies = [
     "colorama; platform_system == \"Windows\"",
     "importlib-metadata; python_version < \"3.8\"",
@@ -125,7 +125,7 @@ name = "colorama"
 version = "0.4.6"
 requires_python = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
 summary = "Cross-platform colored terminal text."
-groups = ["default"]
+groups = ["default", "gribscan"]
 marker = "sys_platform == \"win32\" or platform_system == \"Windows\""
 files = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
@@ -158,7 +158,7 @@ name = "deprecated"
 version = "1.2.18"
 requires_python = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,>=2.7"
 summary = "Python @deprecated decorator to deprecate old python classes, functions or methods."
-groups = ["default"]
+groups = ["default", "gribscan"]
 dependencies = [
     "wrapt<2,>=1.10",
 ]
@@ -171,7 +171,7 @@ files = [
 name = "eccodes"
 version = "2.41.0"
 summary = "Python interface to the ecCodes GRIB and BUFR decoder/encoder"
-groups = ["default"]
+groups = ["gribscan"]
 dependencies = [
     "attrs",
     "cffi",
@@ -237,7 +237,7 @@ files = [
 name = "findlibs"
 version = "0.1.1"
 summary = "A packages to search for shared libraries on various platforms"
-groups = ["default"]
+groups = ["gribscan"]
 files = [
     {file = "findlibs-0.1.1-py3-none-any.whl", hash = "sha256:1b611a040d41e491049568e530c7e032f5c2be8f582386961b8d14a6936406a9"},
     {file = "findlibs-0.1.1.tar.gz", hash = "sha256:dc7a0d4fe2bb6635f1e4bdcde60aecec42b6755c4783c2f629069c2f9321d732"},
@@ -257,19 +257,16 @@ files = [
 [[package]]
 name = "gribscan"
 version = "0.0.6"
-git = "https://github.com/ealerskans/gribscan"
-ref = "deode"
-revision = "8a588a8a59b73a43f73c4fc0bdc8e83fffb50de3"
+editable = true
+path = "/home/ea/git/github/gribscan"
 summary = "Create indices for GRIB files and provide an xarray interface."
-groups = ["default"]
+groups = ["gribscan"]
 dependencies = [
     "cfgrib>=0.9.9.0",
     "eccodes",
-    "numba",
     "numcodecs>=0.10.0",
     "numpy",
     "scipy",
-    "universal-pathlib",
 ]
 
 [[package]]
@@ -300,31 +297,6 @@ files = [
 ]
 
 [[package]]
-name = "llvmlite"
-version = "0.44.0"
-requires_python = ">=3.10"
-summary = "lightweight wrapper around basic LLVM functionality"
-groups = ["default"]
-files = [
-    {file = "llvmlite-0.44.0-cp311-cp311-macosx_10_14_x86_64.whl", hash = "sha256:eed7d5f29136bda63b6d7804c279e2b72e08c952b7c5df61f45db408e0ee52f3"},
-    {file = "llvmlite-0.44.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:ace564d9fa44bb91eb6e6d8e7754977783c68e90a471ea7ce913bff30bd62427"},
-    {file = "llvmlite-0.44.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c5d22c3bfc842668168a786af4205ec8e3ad29fb1bc03fd11fd48460d0df64c1"},
-    {file = "llvmlite-0.44.0-cp311-cp311-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:f01a394e9c9b7b1d4e63c327b096d10f6f0ed149ef53d38a09b3749dcf8c9610"},
-    {file = "llvmlite-0.44.0-cp311-cp311-win_amd64.whl", hash = "sha256:d8489634d43c20cd0ad71330dde1d5bc7b9966937a263ff1ec1cebb90dc50955"},
-    {file = "llvmlite-0.44.0-cp312-cp312-macosx_10_14_x86_64.whl", hash = "sha256:1d671a56acf725bf1b531d5ef76b86660a5ab8ef19bb6a46064a705c6ca80aad"},
-    {file = "llvmlite-0.44.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:5f79a728e0435493611c9f405168682bb75ffd1fbe6fc360733b850c80a026db"},
-    {file = "llvmlite-0.44.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c0143a5ef336da14deaa8ec26c5449ad5b6a2b564df82fcef4be040b9cacfea9"},
-    {file = "llvmlite-0.44.0-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:d752f89e31b66db6f8da06df8b39f9b91e78c5feea1bf9e8c1fba1d1c24c065d"},
-    {file = "llvmlite-0.44.0-cp312-cp312-win_amd64.whl", hash = "sha256:eae7e2d4ca8f88f89d315b48c6b741dcb925d6a1042da694aa16ab3dd4cbd3a1"},
-    {file = "llvmlite-0.44.0-cp313-cp313-macosx_10_14_x86_64.whl", hash = "sha256:319bddd44e5f71ae2689859b7203080716448a3cd1128fb144fe5c055219d516"},
-    {file = "llvmlite-0.44.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:9c58867118bad04a0bb22a2e0068c693719658105e40009ffe95c7000fcde88e"},
-    {file = "llvmlite-0.44.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:46224058b13c96af1365290bdfebe9a6264ae62fb79b2b55693deed11657a8bf"},
-    {file = "llvmlite-0.44.0-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:aa0097052c32bf721a4efc03bd109d335dfa57d9bffb3d4c24cc680711b8b4fc"},
-    {file = "llvmlite-0.44.0-cp313-cp313-win_amd64.whl", hash = "sha256:2fb7c4f2fb86cbae6dca3db9ab203eeea0e22d73b99bc2341cdf9de93612e930"},
-    {file = "llvmlite-0.44.0.tar.gz", hash = "sha256:07667d66a5d150abed9157ab6c0b9393c9356f229784a4385c02f99e94fc94d4"},
-]
-
-[[package]]
 name = "locket"
 version = "1.0.0"
 requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
@@ -352,40 +324,11 @@ files = [
 ]
 
 [[package]]
-name = "numba"
-version = "0.61.2"
-requires_python = ">=3.10"
-summary = "compiling Python code using LLVM"
-groups = ["default"]
-dependencies = [
-    "llvmlite<0.45,>=0.44.0dev0",
-    "numpy<2.3,>=1.24",
-]
-files = [
-    {file = "numba-0.61.2-cp311-cp311-macosx_10_14_x86_64.whl", hash = "sha256:efd3db391df53aaa5cfbee189b6c910a5b471488749fd6606c3f33fc984c2ae2"},
-    {file = "numba-0.61.2-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:49c980e4171948ffebf6b9a2520ea81feed113c1f4890747ba7f59e74be84b1b"},
-    {file = "numba-0.61.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:3945615cd73c2c7eba2a85ccc9c1730c21cd3958bfcf5a44302abae0fb07bb60"},
-    {file = "numba-0.61.2-cp311-cp311-manylinux_2_28_aarch64.whl", hash = "sha256:bbfdf4eca202cebade0b7d43896978e146f39398909a42941c9303f82f403a18"},
-    {file = "numba-0.61.2-cp311-cp311-win_amd64.whl", hash = "sha256:76bcec9f46259cedf888041b9886e257ae101c6268261b19fda8cfbc52bec9d1"},
-    {file = "numba-0.61.2-cp312-cp312-macosx_10_14_x86_64.whl", hash = "sha256:34fba9406078bac7ab052efbf0d13939426c753ad72946baaa5bf9ae0ebb8dd2"},
-    {file = "numba-0.61.2-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:4ddce10009bc097b080fc96876d14c051cc0c7679e99de3e0af59014dab7dfe8"},
-    {file = "numba-0.61.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:5b1bb509d01f23d70325d3a5a0e237cbc9544dd50e50588bc581ba860c213546"},
-    {file = "numba-0.61.2-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:48a53a3de8f8793526cbe330f2a39fe9a6638efcbf11bd63f3d2f9757ae345cd"},
-    {file = "numba-0.61.2-cp312-cp312-win_amd64.whl", hash = "sha256:97cf4f12c728cf77c9c1d7c23707e4d8fb4632b46275f8f3397de33e5877af18"},
-    {file = "numba-0.61.2-cp313-cp313-macosx_10_14_x86_64.whl", hash = "sha256:3a10a8fc9afac40b1eac55717cece1b8b1ac0b946f5065c89e00bde646b5b154"},
-    {file = "numba-0.61.2-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:7d3bcada3c9afba3bed413fba45845f2fb9cd0d2b27dd58a1be90257e293d140"},
-    {file = "numba-0.61.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:bdbca73ad81fa196bd53dc12e3aaf1564ae036e0c125f237c7644fe64a4928ab"},
-    {file = "numba-0.61.2-cp313-cp313-manylinux_2_28_aarch64.whl", hash = "sha256:5f154aaea625fb32cfbe3b80c5456d514d416fcdf79733dd69c0df3a11348e9e"},
-    {file = "numba-0.61.2-cp313-cp313-win_amd64.whl", hash = "sha256:59321215e2e0ac5fa928a8020ab00b8e57cda8a97384963ac0dfa4d4e6aa54e7"},
-    {file = "numba-0.61.2.tar.gz", hash = "sha256:8750ee147940a6637b80ecf7f95062185ad8726c8c28a2295b8ec1160a196f7d"},
-]
-
-[[package]]
 name = "numcodecs"
 version = "0.15.1"
 requires_python = ">=3.11"
 summary = "A Python package providing buffer compression and transformation codecs for use in data storage and communication applications."
-groups = ["default"]
+groups = ["default", "gribscan"]
 dependencies = [
     "deprecated",
     "numpy>=1.24",
@@ -411,7 +354,7 @@ name = "numpy"
 version = "2.2.5"
 requires_python = ">=3.10"
 summary = "Fundamental package for array computing in Python"
-groups = ["default"]
+groups = ["default", "gribscan"]
 files = [
     {file = "numpy-2.2.5-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:c42365005c7a6c42436a54d28c43fe0e01ca11eb2ac3cefe796c25a5f98e5e9b"},
     {file = "numpy-2.2.5-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:498815b96f67dc347e03b719ef49c772589fb74b8ee9ea2c37feae915ad6ebda"},
@@ -532,7 +475,7 @@ name = "pycparser"
 version = "2.22"
 requires_python = ">=3.8"
 summary = "C parser in Python"
-groups = ["default"]
+groups = ["gribscan"]
 files = [
     {file = "pycparser-2.22-py3-none-any.whl", hash = "sha256:c3702b6d3dd8c7abc1afa565d7e63d53a1d0bd86cdc24edd75470f4de499cfcc"},
     {file = "pycparser-2.22.tar.gz", hash = "sha256:491c8be9c040f5390f5bf44a5b07752bd07f56edf992381b05c701439eec10f6"},
@@ -604,7 +547,7 @@ name = "scipy"
 version = "1.15.2"
 requires_python = ">=3.10"
 summary = "Fundamental algorithms for scientific computing in Python"
-groups = ["default"]
+groups = ["default", "gribscan"]
 dependencies = [
     "numpy<2.5,>=1.23.5",
 ]
@@ -712,7 +655,7 @@ name = "wrapt"
 version = "1.17.2"
 requires_python = ">=3.8"
 summary = "Module for decorators, wrappers and monkey patching."
-groups = ["default"]
+groups = ["default", "gribscan"]
 files = [
     {file = "wrapt-1.17.2-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:ff04ef6eec3eee8a5efef2401495967a916feaa353643defcc03fc74fe213b58"},
     {file = "wrapt-1.17.2-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:4db983e7bca53819efdbd64590ee96c9213894272c776966ca6306b73e4affda"},

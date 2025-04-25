@@ -2,6 +2,7 @@ import sys
 import os
 from argparse import ArgumentParser
 
+import yaml
 from loguru import logger
 
 from mars_to_zarr.retrieve_from_mars import retrieve_data
@@ -34,12 +35,15 @@ def run():
     argparser = _setup_argparse()
     args = argparser.parse_args()
 
+    # Load the yaml config file
+    with open(args.config, 'r') as f:
+        mars_to_zarr_dict = yaml.safe_load(f)
+
     # Retrieve grib from MARS
-    retrieve_data(args)
-    logger.info("Have already retrieved the data!")
+    #retrieve_data(mars_to_zarr_dict)
 
     # Read the retrieved grib data
-    read_source(args)
+    read_source(mars_to_zarr_dict)
 
 
 if __name__ == "__main__":

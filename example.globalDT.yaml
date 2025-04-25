@@ -2,7 +2,12 @@
 # Check the MARS Catalogue for suggestions on requests:
 # https://apps.ecmwf.int/mars-catalogue/?type=fc&class=rd&stream=oper&expver=iekm
 surface:
-  inputs:
+  general:
+    model: "globalDT"
+    level_type: "surface"
+    data_root: "/dmidata/users/ea/mars/"
+    grib_fn: "globalDT_global_sf.grib"
+  mars_request:
     class: "rd"
     stream: "oper"
     expver: "iekm"
@@ -10,14 +15,18 @@ surface:
     levtype: "sfc"
     date: "2025-04-20"
     time: "00:00:00"
-    Area: "74/-27/33/45"
+    #Area: "74/-27/33/45"
+    #grid: "av"
     param: "129.128/134.128/151.128/165.128/166.128/167.128/176.128/177.128/172.128"
     step: "0/6/12/18/24"
-  outputs:
-    fp: "/dmidata/users/ea/globalDT_sf.grib"
 
 upper_air:
-  inputs:
+  general:
+    model: "globalDT"
+    level_type: "pressure_level"
+    data_root: "/dmidata/users/ea/mars/"
+    grib_fn: "globalDT_global_pl.grib"
+  mars_request:
     class: "rd"
     stream: "oper"
     expver: "iekm"
@@ -26,8 +35,7 @@ upper_air:
     levelist: "100/200/400/500/700/850/925/1000"
     date: "2025-04-20"
     time: "00:00:00"
-    Area: "74/-27/33/45"
+    #Area: "74/-27/33/45"
+    #grid: "av"
     param: "129.128/130.128/131/132/135.128/157.128"
     step: "0/6/12/18/24"
-  outputs:
-    fp: "/dmidata/users/ea/globalDT_pl.grib"
