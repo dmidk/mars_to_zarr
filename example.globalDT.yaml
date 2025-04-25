@@ -1,20 +1,21 @@
 # Global DT set-up
 # Check the MARS Catalogue for suggestions on requests:
 # https://apps.ecmwf.int/mars-catalogue/?type=fc&class=rd&stream=oper&expver=iekm
-surface:
-  inputs:
-    class: "rd"
-    stream: "oper"
-    expver: "iekm"
-    type: "fc"
-    levtype: "sfc"
-    date: "2025-04-20"
-    time: "00:00:00"
-    Area: "74/-27/33/45"
-    param: "129.128/134.128/151.128/165.128/166.128/167.128/176.128/177.128/172.128"
-    step: "0/6/12/18/24"
-  outputs:
-    fp: "/dmidata/users/ea/globalDT_sf.grib"
+# surface:
+#   inputs:
+#     class: "rd"
+#     stream: "oper"
+#     expver: "iekm"
+#     type: "fc"
+#     levtype: "sfc"
+#     date: "2025-04-20"
+#     time: "00:00:00"
+#     Area: "74/-27/33/45"
+#     grid: "0.04/0.04"
+#     param: "129.128/134.128/151.128/165.128/166.128/167.128/176.128/177.128/172.128"
+#     step: "0/6/12/18/24"
+#   outputs:
+#     fp: "/Users/b040227/git_repos/mars-to-zarr/globalDT_sf.grib"
 
 upper_air:
   inputs:
@@ -27,7 +28,25 @@ upper_air:
     date: "2025-04-20"
     time: "00:00:00"
     Area: "74/-27/33/45"
-    param: "129.128/130.128/131/132/135.128/157.128"
-    step: "0/6/12/18/24"
+   # grid: "0.1/0.1"
+    #grid: "av"
+    param: "131/132"
+    step: "0/6"
   outputs:
-    fp: "/dmidata/users/ea/globalDT_pl.grib"
+    fp: "/Users/b040227/git_repos/mars-to-zarr/globalDT_pl.grib"
+
+# upper_air:
+#   inputs:
+#     class: "rd"
+#     stream: "oper"
+#     expver: "iekm"
+#     type: "fc"
+#     levtype: "pl"
+#     levelist: "100/200/400/500/700/850/925/1000"
+#     date: "2025-04-20"
+#     time: "00:00:00"
+#     Area: "74/-27/33/45"
+#     param: "129.128/130.128/131/132/135.128/157.128"
+#     step: "0/6/12/18/24"
+#   outputs:
+#     fp: "/Users/b040227/git_repos/mars-to-zarr/globalDT_pl.grib"
