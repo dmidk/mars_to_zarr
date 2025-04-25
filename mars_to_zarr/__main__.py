@@ -5,6 +5,7 @@ from argparse import ArgumentParser
 from loguru import logger
 
 from mars_to_zarr.retrieve_from_mars import retrieve_data
+from mars_to_zarr.read_grib import read_grib_to_xarray
 
 def run():
 
@@ -26,7 +27,9 @@ def run():
 
     args = parser.parse_args()
 
-    retrieve_data(args)
+    grib_files = retrieve_data(args)
+
+    read_grib_to_xarray(grib_files)
 
 
 if __name__ == "__main__":

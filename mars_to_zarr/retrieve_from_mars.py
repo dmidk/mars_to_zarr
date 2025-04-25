@@ -36,4 +36,3 @@ def retrieve_data(args: argparse.Namespace) -> list:
         logger.info(f"Retrieved grib file: {outputs_dict['fp']}")
 
         return retrieved_grib_files
-

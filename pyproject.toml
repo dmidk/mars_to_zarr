@@ -10,7 +10,9 @@ dependencies = [
     "xarray<=2024.11.0",
     "zarr<3",
     "loguru>=0.7.3",
-    "pyyaml>=6.0.2"
+    "pyyaml>=6.0.2",
+    "gribscan>=0.0.14",
+    "fsspec>=2025.3.2",
 ]
 requires-python = ">=3.11"
 readme = "README.md"
