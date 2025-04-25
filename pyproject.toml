@@ -10,7 +10,11 @@ dependencies = [
     "xarray<=2024.11.0",
     "zarr<3",
     "loguru>=0.7.3",
-    "pyyaml>=6.0.2"
+    "pyyaml>=6.0.2",
+    "fsspec>=2025.3.2",
+    "ecmwfspec @ git+https://github.com/observingClouds/ecmwfspec@main",
+    "gribscan @ git+https://github.com/ealerskans/gribscan@deode",
+    "isodate>=0.7.2",
 ]
 requires-python = ">=3.11"
 readme = "README.md"

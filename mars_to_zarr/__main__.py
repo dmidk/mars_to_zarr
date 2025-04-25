@@ -5,12 +5,14 @@ from argparse import ArgumentParser
 from loguru import logger
 
 from mars_to_zarr.retrieve_from_mars import retrieve_data
+from mars_to_zarr.read_source import read_source
 
-def run():
 
+def _setup_argparse():
+    """Set up argument parser."""
 
     parser = ArgumentParser(
-        description="Train or evaluate NeurWP models for LAM"
+        description="Retrieve grib from MARS and convert to zarr"
     )
     parser.add_argument(
         "--config",
@@ -24,9 +26,20 @@ def run():
         help="Increase output verbosity",
     )
 
-    args = parser.parse_args()
+    return parser
 
+
+def run():
+
+    argparser = _setup_argparse()
+    args = argparser.parse_args()
+
+    # Retrieve grib from MARS
     retrieve_data(args)
+    logger.info("Have already retrieved the data!")
+
+    # Read the retrieved grib data
+    read_source(args)
 
 
 if __name__ == "__main__":
