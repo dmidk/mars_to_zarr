@@ -13,8 +13,9 @@ dependencies = [
     "pyyaml>=6.0.2",
     "gribscan>=0.0.14",
     "fsspec>=2025.3.2",
+    "ipdb>=0.13.13",
 ]
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 readme = "README.md"
 license = {text = "MIT"}
 

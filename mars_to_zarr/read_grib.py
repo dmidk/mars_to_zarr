@@ -40,9 +40,10 @@ def read_grib_to_xarray(grib_files: list) -> xr.Dataset:
     indexfiles = []
     for gribfile in grib_files:
         indexfile = FP_GRIB_INDECIES_DEFAULT / (Path(gribfile).name + ".idx")
+        print(gribfile)
         if not indexfile.exists():
             print(f"Creating index for {gribfile} in {FP_GRIB_INDECIES_DEFAULT}")
-            gribscan.write_index(gribfile, indexfile)
+            gribscan.write_index(gribfile=str(gribfile), idxfile=indexfile)
         else:
             print(f"Index already exists for {gribfile} in {FP_GRIB_INDECIES_DEFAULT}")
 
@@ -55,10 +56,9 @@ def read_grib_to_xarray(grib_files: list) -> xr.Dataset:
     )
 
     fn = f"{fp_forecast_root.name}.zarr.json"
-    fp_zarr_json = FP_GRIB_INDECIES_DEFAULT / fn
+    fp_zarr_json = fp_forecast_root / fn
     with open(fp_zarr_json, "w") as f:
         json.dump(refs, f)
     print(f"Built zarr index for analysis time {fp_forecast_root.name} in {fp_zarr_json}")
 
-    ds = xr.open_zarr("reference::/Users/b040227/.gribscan/mars-to-zarr.zarr.json", consolidated=False)
-    print(ds)
+    ds = xr.open_zarr(f"reference::{fp_zarr_json}", consolidated=False)
