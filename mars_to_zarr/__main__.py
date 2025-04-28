@@ -6,6 +6,7 @@ import yaml
 from loguru import logger
 
 from mars_to_zarr.read_source import read_source
+from mars_to_zarr.write_to_zarr import write_to_zarr
 
 
 def _setup_argparse():
@@ -42,7 +43,10 @@ def run():
     # retrieve_data(mars_to_zarr_dict)
 
     # Read the retrieved grib data
-    read_source(mars_to_zarr_dict)
+    ds = read_source(mars_to_zarr_dict)
+
+    # Write the xarray dataset to zarr format
+    write_to_zarr(ds)
 
 
 if __name__ == "__main__":

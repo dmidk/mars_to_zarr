@@ -18,7 +18,7 @@ elif eccodes.__version__ < "2.20.0" and platform == "darwin":
     )
 
 
-def read_source(mars_to_zarr_dict: dict) -> None:
+def read_source(mars_to_zarr_dict: dict) -> xr.Dataset:
     """
     Read the grib files and convert them to zarr format.
 
@@ -27,7 +27,7 @@ def read_source(mars_to_zarr_dict: dict) -> None:
             Dictionary containing the dataset information.
 
     Returns:
-        None
+        xr.Dataset: The dataset in zarr format.
     """
 
     for dataset_name, dataset_dict in mars_to_zarr_dict.items():
@@ -104,4 +104,4 @@ def read_source(mars_to_zarr_dict: dict) -> None:
 
         ds = xr.open_zarr(f"reference::{fp_zarr_json}", consolidated=False)
 
-        print(ds)
+        return ds
