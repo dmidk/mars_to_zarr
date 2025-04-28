@@ -11,14 +11,19 @@ dependencies = [
     "zarr<3",
     "loguru>=0.7.3",
     "pyyaml>=6.0.2",
-    "gribscan>=0.0.14",
     "fsspec>=2025.3.2",
-    "ipdb>=0.13.13",
+    "gribscan>=0.0.14",
+    "isodate>=0.7.2",
+    "scipy>=1.15.2",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
 license = {text = "MIT"}
 
+[tool.pdm.dev-dependencies]
+gribscan = [
+    "-e /home/ea/git/github/gribscan",
+]
 
 [tool.pdm]
 distribution = false

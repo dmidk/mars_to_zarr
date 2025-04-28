@@ -2,16 +2,18 @@ import sys
 import os
 from argparse import ArgumentParser
 
+import yaml
 from loguru import logger
 
 from mars_to_zarr.retrieve_from_mars import retrieve_data
-from mars_to_zarr.read_grib import read_grib_to_xarray
+from mars_to_zarr.read_source import read_source
 
-def run():
 
+def _setup_argparse():
+    """Set up argument parser."""
 
     parser = ArgumentParser(
-        description="Train or evaluate NeurWP models for LAM"
+        description="Retrieve grib from MARS and convert to zarr"
     )
     parser.add_argument(
         "--config",
@@ -25,11 +27,23 @@ def run():
         help="Increase output verbosity",
     )
 
-    args = parser.parse_args()
+    return parser
 
-    grib_files = retrieve_data(args)
 
-    read_grib_to_xarray(grib_files)
+def run():
+
+    argparser = _setup_argparse()
+    args = argparser.parse_args()
+
+    # Load the yaml config file
+    with open(args.config, 'r') as f:
+        mars_to_zarr_dict = yaml.safe_load(f)
+
+    # Retrieve grib from MARS
+    #retrieve_data(mars_to_zarr_dict)
+
+    # Read the retrieved grib data
+    read_source(mars_to_zarr_dict)
 
 
 if __name__ == "__main__":
