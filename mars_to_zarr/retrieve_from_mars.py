@@ -1,11 +1,12 @@
-import argparse
 from pathlib import Path
 
-from loguru import logger
 from ecmwfapi import ECMWFService
+from loguru import logger
+
 
 def logging_wrapper(msg):
     logger.info(msg)
+
 
 def retrieve_data(mars_to_zarr_dict: dict):
     """Retrieve data from the ECMWF MARS catalogue"""
@@ -18,8 +19,11 @@ def retrieve_data(mars_to_zarr_dict: dict):
             dataset_dict["general"]["data_root"],
             dataset_dict["general"]["model"],
             "grib",
-            dataset_dict["general"]["grib_fn"]
+            dataset_dict["general"]["grib_fn"],
         )
+
+        # Create the directory if it doesn't exist
+        grib_fp.parent.mkdir(parents=True, exist_ok=True)
 
         # Get the mars request dict for the specified dataset
         mars_request_dict = dataset_dict["mars_request"]

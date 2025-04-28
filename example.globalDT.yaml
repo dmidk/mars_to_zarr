@@ -5,7 +5,7 @@ surface:
   general:
     model: "globalDT"
     level_type: "surface"
-    data_root: "/dmidata/users/ea/mars/"
+    data_root: "/Users/b040227/git_repos/mars-to-zarr/"
     grib_fn: "globalDT_global_sf.grib"
   mars_request:
     class: "rd"
@@ -15,10 +15,11 @@ surface:
     levtype: "sfc"
     date: "2025-04-20"
     time: "00:00:00"
-    #Area: "74/-27/33/45"
-    #grid: "av"
-    param: "129.128/134.128/151.128/165.128/166.128/167.128/176.128/177.128/172.128"
-    step: "0/6/12/18/24"
+    Area: "74/-27/33/45"
+    grid: "0.05/0.05"
+    param: "129.128"
+    #param: "129.128/134.128/151.128/165.128/166.128/167.128/176.128/177.128/172.128"
+    step: "0/6"
 
 # upper_air:
 #   general:

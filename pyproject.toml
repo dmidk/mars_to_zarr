@@ -20,10 +20,10 @@ requires-python = ">=3.10"
 readme = "README.md"
 license = {text = "MIT"}
 
-[tool.pdm.dev-dependencies]
-gribscan = [
-    "-e /home/ea/git/github/gribscan",
-]
-
 [tool.pdm]
 distribution = false
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "pre-commit>=4.2.0",
+]

@@ -1,11 +1,10 @@
-import sys
 import os
+import sys
 from argparse import ArgumentParser
 
 import yaml
 from loguru import logger
 
-from mars_to_zarr.retrieve_from_mars import retrieve_data
 from mars_to_zarr.read_source import read_source
 
 
@@ -18,7 +17,7 @@ def _setup_argparse():
     parser.add_argument(
         "--config",
         help="Path to the yaml config file to load.",
-        default="example.globalDT.yaml"
+        default="example.globalDT.yaml",
     )
     parser.add_argument(
         "-v",
@@ -36,24 +35,31 @@ def run():
     args = argparser.parse_args()
 
     # Load the yaml config file
-    with open(args.config, 'r') as f:
+    with open(args.config, "r") as f:
         mars_to_zarr_dict = yaml.safe_load(f)
 
     # Retrieve grib from MARS
-    #retrieve_data(mars_to_zarr_dict)
+    # retrieve_data(mars_to_zarr_dict)
 
     # Read the retrieved grib data
     read_source(mars_to_zarr_dict)
 
 
 if __name__ == "__main__":
-    logger.add(sys.stderr, format="{time} {level} {message}", filter="my_module", level="INFO")
+    logger.add(
+        sys.stderr,
+        format="{time} {level} {message}",
+        filter="my_module",
+        level="INFO",
+    )
 
     # Check that $HOME/.ecmwfapirc exists
     if not os.path.exists(os.path.expanduser("~/.ecmwfapirc")):
-        url="https://api.ecmwf.int/v1/key/"
-        logger.error(f"Please create a ~/.ecmwfapirc file with your ECMWF API key\n \
-                      get your key from {url}")
+        url = "https://api.ecmwf.int/v1/key/"
+        logger.error(
+            f"Please create a ~/.ecmwfapirc file with your ECMWF API key\n \
+                      get your key from {url}"
+        )
 
         sys.exit(1)
 
