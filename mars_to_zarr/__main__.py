@@ -6,6 +6,7 @@ import yaml
 from loguru import logger
 
 from mars_to_zarr.read_source import read_source
+from mars_to_zarr.retrieve_from_mars import retrieve_data
 from mars_to_zarr.write_to_zarr import write_to_zarr
 
 
@@ -38,17 +39,15 @@ def run():
     # Load the yaml config file
     with open(args.config, "r") as f:
         mars_to_zarr_dict = yaml.safe_load(f)
-    
+
     for dataset_name, dataset_dict in mars_to_zarr_dict.items():
         logger.info(f"Working on dataset: {dataset_name}")
 
         # Retrieve grib from MARS
-        # retrieve_data(dataset_dict)
+        retrieve_data(dataset_dict)
 
         # Read the retrieved grib data
         ds = read_source(dataset_dict)
-        print(ds)
-        print(list(ds.data_vars))
 
         # Write the xarray dataset to zarr format
         write_to_zarr(ds, dataset_dict)

@@ -91,9 +91,7 @@ def read_source(dataset_dict: dict) -> xr.Dataset:
     flattened_ref = {"version": 1, "refs": original[zarr_group]}
 
     # Ensure .zgroup exists
-    flattened_ref["refs"].setdefault(
-        ".zgroup", json.dumps({"zarr_format": 2})
-    )
+    flattened_ref["refs"].setdefault(".zgroup", json.dumps({"zarr_format": 2}))
 
     # Overwrite the file
     with open(fp_zarr_json, "w") as f:
