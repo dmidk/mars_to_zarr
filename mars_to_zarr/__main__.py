@@ -48,12 +48,10 @@ def run():
     with open(args.config, "r") as f:
         mars_to_zarr_dict = yaml.safe_load(f)
 
-    for dataset_name, dataset_dict in mars_to_zarr_dict.items():
-        logger.info(f"Working on dataset: {dataset_name}")
-
-        # clear the cache if requested
-        if args.clear_cache:
-            logger.info("Clearing cache")
+    # clear the cache if requested
+    if args.clear_cache:
+        logger.info("Clearing cache")
+        for dataset_name, dataset_dict in mars_to_zarr_dict.items():
 
             model_root = Path(dataset_dict["general"]["data_root"]) / Path(
                 dataset_dict["general"]["model"]
@@ -62,12 +60,15 @@ def run():
             caches = [
                 model_root / "grib",
                 model_root / "zarr",
-                model_root / "zarr",
+                model_root / "refs",
             ]
             for cache in caches:
                 if cache.exists():
                     logger.info(f"Deleting {cache}")
                     shutil.rmtree(cache)
+
+    for dataset_name, dataset_dict in mars_to_zarr_dict.items():
+        logger.info(f"Working on dataset: {dataset_name}")
 
         # Retrieve grib from MARS
         retrieve_data(dataset_dict)
