@@ -62,21 +62,16 @@ def write_to_zarr(ds: xr.Dataset, dataset_dict: dict) -> None:
     if level_type == "surface":
         # lsm and orography are static variables,
         # select only one time step
-        static_lsm = ds["lsm"].isel(time=0).drop_vars("time")
-        static_orog = ds["z"].isel(time=0).drop_vars("time")
-        ds["lsm"] = static_lsm.chunk({"y": 512, "x": 512})
-        ds["z"] = static_orog.chunk({"y": 512, "x": 512})
-        # Variable renaming
-        rename_dict = {
-            "2t": "t2m",
-            "10u": "u10m",
-            "10v": "v10m",
-            "sp": "pres0m",
-            "msl": "pres_seasurface",
-            "ssr": "swavr0m",
-            "str": "lwavr0m",
-            "z": "orography",
-        }
+
+        # Convert lsm and orography to 2D arrays (static fields)
+        # if they are not already and if they are in the dataset
+        if "lsm" in ds:
+            static_lsm = ds["lsm"].isel(time=0).drop_vars("time")
+            ds["lsm"] = static_lsm.chunk({"y": 512, "x": 512})
+        if "z" in ds:
+            static_orog = ds["z"].isel(time=0).drop_vars("time")
+            ds["z"] = static_orog.chunk({"y": 512, "x": 512})
+
     elif level_type == "pressure_level":
         # Rename the 500 hPa level to 600 hPa since globalDT
         # is missing the 600 hPa data
@@ -87,17 +82,29 @@ def write_to_zarr(ds: xr.Dataset, dataset_dict: dict) -> None:
         ds = ds.rename({"level": "pressure"})
         # Re-chunk the dataset
         ds = ds.chunk({"time": 1, "pressure": 1, "lat": 512, "lon": 512})
-        # Variable renaming
-        rename_dict = {
+
+    rename_dict = {
+            "2t": "t2m",
+            "10u": "u10m",
+            "10v": "v10m",
+            "sp": "pres0m",
+            "msl": "pres_seasurface",
+            "ssr": "swavr0m",
+            "str": "lwavr0m",
+            "z": "orography",
             "w": "tw",
         }
-    ds = ds.rename_vars(rename_dict)
+
+    # Rename the variables in the dataset if they are in the rename_dict
+    for old_name, new_name in rename_dict.items():
+        if old_name in ds:
+            ds = ds.rename({old_name: new_name})
 
     for var in ds.variables:
         ds[var].encoding.clear()
 
     logger.info("Write data to zarr format...")
 
-    ds.to_zarr(str(output_path), mode="w", consolidated=True)
+    ds.to_zarr(str(output_path), mode="w", consolidated=False)
 
     logger.info(f"Dataset written to zarr format at {str(output_path)}")

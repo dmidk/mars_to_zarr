@@ -4,6 +4,8 @@ from argparse import ArgumentParser
 
 import yaml
 from loguru import logger
+from pathlib import Path
+import shutil
 
 from mars_to_zarr.read_source import read_source
 from mars_to_zarr.retrieve_from_mars import retrieve_data
@@ -27,6 +29,12 @@ def _setup_argparse():
         action="store_true",
         help="Increase output verbosity",
     )
+    parser.add_argument(
+        "--clear-cache",
+        action="store_true",
+        help="Clear the cache before running",
+        default=False,
+    )
 
     return parser
 
@@ -42,6 +50,22 @@ def run():
 
     for dataset_name, dataset_dict in mars_to_zarr_dict.items():
         logger.info(f"Working on dataset: {dataset_name}")
+
+        # clear the cache if requested
+        if args.clear_cache:
+            logger.info("Clearing cache")
+
+            model_root = Path(dataset_dict["general"]["data_root"]) / Path(dataset_dict["general"]["model"])
+
+            caches = [
+                model_root / "grib",
+                model_root / "zarr",
+                model_root / "zarr",
+            ]
+            for cache in caches:
+                if cache.exists():
+                    logger.info(f"Deleting {cache}")
+                    shutil.rmtree(cache)
 
         # Retrieve grib from MARS
         retrieve_data(dataset_dict)

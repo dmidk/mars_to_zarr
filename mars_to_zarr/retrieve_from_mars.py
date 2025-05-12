@@ -19,6 +19,11 @@ def retrieve_data(mars_to_zarr_dict: dict):
         mars_to_zarr_dict["general"]["grib_fn"],
     )
 
+    # Check if the grib file already exists
+    if grib_fp.exists():
+        logger.info(f"Grib file already exists: {grib_fp}")
+        return
+
     # Create the directory if it doesn't exist
     grib_fp.parent.mkdir(parents=True, exist_ok=True)
 
