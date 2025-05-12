@@ -84,16 +84,16 @@ def write_to_zarr(ds: xr.Dataset, dataset_dict: dict) -> None:
         ds = ds.chunk({"time": 1, "pressure": 1, "lat": 512, "lon": 512})
 
     rename_dict = {
-            "2t": "t2m",
-            "10u": "u10m",
-            "10v": "v10m",
-            "sp": "pres0m",
-            "msl": "pres_seasurface",
-            "ssr": "swavr0m",
-            "str": "lwavr0m",
-            "z": "orography",
-            "w": "tw",
-        }
+        "2t": "t2m",
+        "10u": "u10m",
+        "10v": "v10m",
+        "sp": "pres0m",
+        "msl": "pres_seasurface",
+        "ssr": "swavr0m",
+        "str": "lwavr0m",
+        "z": "orography",
+        "w": "tw",
+    }
 
     # Rename the variables in the dataset if they are in the rename_dict
     for old_name, new_name in rename_dict.items():

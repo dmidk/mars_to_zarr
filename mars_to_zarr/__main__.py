@@ -1,11 +1,11 @@
 import os
+import shutil
 import sys
 from argparse import ArgumentParser
+from pathlib import Path
 
 import yaml
 from loguru import logger
-from pathlib import Path
-import shutil
 
 from mars_to_zarr.read_source import read_source
 from mars_to_zarr.retrieve_from_mars import retrieve_data
@@ -55,7 +55,9 @@ def run():
         if args.clear_cache:
             logger.info("Clearing cache")
 
-            model_root = Path(dataset_dict["general"]["data_root"]) / Path(dataset_dict["general"]["model"])
+            model_root = Path(dataset_dict["general"]["data_root"]) / Path(
+                dataset_dict["general"]["model"]
+            )
 
             caches = [
                 model_root / "grib",
